@@ -1,0 +1,30 @@
+.list_button {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 30px;
+}
+
+.button {
+  border-radius: 10px;
+  font-size: 24px;
+}
+
+.button:hover,
+:focus {
+  cursor: pointer;
+  outline-style: none;
+}
+
+.button:not(:last-child) {
+  margin-right: 20px;
+}
+
+.statistics_item {
+  font-size: 36px;
+}
