@@ -1,7 +1,9 @@
 import { Component } from 'react';
+import { Section } from '../Section';
 import { FeedbackOptions } from '../FeedbackOptions';
 import { Statistics } from '../Statistics';
-import styles from './Feedback.module.css';
+//import { Notification } from 'components/Notification';
+import { Notification } from '../Notification';
   
 export class Feedback extends Component {
   static positivParcentage = 0;
@@ -9,58 +11,47 @@ export class Feedback extends Component {
   state = {
     good: 0,
     neutral: 0,
-    bad: 0,
-    test:0,
-  }
-
-  hadleIncrementGood = () => {
-    this.setState(prevState => ({ good: prevState.good + 1 }));
+    bad: 0,   
+  } 
+  
+  onLeaveFeedback = event => {
+    const {name} = event.target;
+    this.setState(prevState => ({[name]: prevState[name] + 1 }));
   };
-
-  hadleIncrementNeutral = () => {
-    this.setState(prevState => ({ neutral: prevState.neutral + 1 }));
-  };
-
-  hadleIncrementBad = () => {
-    this.setState(prevState => ({ bad: prevState.bad + 1 }));
-  };
-
-  hadleIncrementTest = () => {
-    this.setState(prevState => ({ test: prevState.test + 1 }));    
-  };
-
+  
   countTotalFeedback = () => {
-    
-    const total = this.state.good + this.state.neutral + this.state.bad + this.state.test;
-    return total;  
-  }
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;    
+  };
   
   countPositiveFeedbackParcentage = () => {
-    const positiveParcentage = Math.trunc(this.state.good * 100 / this.countTotalFeedback());
-    return positiveParcentage;
-  }
-
-  render() {
-   
+    return Math.trunc(this.state.good * 100 / this.countTotalFeedback());    
+  };
+  
+  render()
+  {      
     return (
       <>
-        <h2 className={styles.title}>Please leave feedback</h2>        
-        <FeedbackOptions
-          onLeaveFeedbackGood={this.hadleIncrementGood}
-          onLeaveFeedbackNeutral={this.hadleIncrementNeutral}
-          onLeaveFeedbackBad={this.hadleIncrementBad}
-        />
-        <button type="button" onClick={this.hadleIncrementTest} className={styles.button} data='test'>Test</button>
+        <Section title="Please leave feedback">              
+          <FeedbackOptions
+            onLeaveFeedback={this.onLeaveFeedback} 
+            options={Object.keys(this.state)}                 
+          />  
+        </Section>  
+
+        {this.countTotalFeedback() === 0 ? 
+         (<Notification message="There is no feedback"/>):
+         (<Section title="Statistics">
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={this.countTotalFeedback()}
+              positiveParcentage={this.countPositiveFeedbackParcentage()}
+            />
+          </Section>)}
         
-        <Statistics
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-          total={this.countTotalFeedback()}
-          positiveParcentage={this.countPositiveFeedbackParcentage()}
-        />
-        <span className={styles.statistics_item}>Test: {this.state.test}</span>
-      </>
-    );
-  }  
+      </> 
+    )
+  }                 
 }

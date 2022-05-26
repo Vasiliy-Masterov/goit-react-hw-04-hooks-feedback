@@ -11,7 +11,7 @@ export const App = () => {
         alignItems: 'flex-start',
         fontSize: 40,
         color: '#010101',       
-        padding: '40px 0 0 40px'
+        padding: '20px 0 0 40px'
       }}
     >     
       <Feedback />

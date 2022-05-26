@@ -7,11 +7,15 @@
   border-radius: 10px;
   font-size: 24px;
 }
+.button::first-letter {
+  text-transform: uppercase;
+}
 
 .button:hover,
 :focus {
   cursor: pointer;
   outline-style: none;
+  background-color: rgb(100, 231, 85);
 }
 
 .button:not(:last-child) {
