@@ -1,8 +1,9 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Section } from '../Section';
 import { FeedbackOptions } from '../FeedbackOptions';
 import { Statistics } from '../Statistics';
-//import { Notification } from 'components/Notification';
+
 import { Notification } from '../Notification';
   
 export class Feedback extends Component {
@@ -13,6 +14,7 @@ export class Feedback extends Component {
     neutral: 0,
     bad: 0,   
   } 
+  
   
   onLeaveFeedback = event => {
     const {name} = event.target;
@@ -54,4 +56,11 @@ export class Feedback extends Component {
       </> 
     )
   }                 
+}
+
+Feedback.propTypes = {
+  Section: PropTypes.node,
+  FeedbackOptions: PropTypes.node,
+  Notification: PropTypes.node,
+  Statistics: PropTypes.node,
 }
