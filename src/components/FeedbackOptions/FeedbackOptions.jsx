@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import styles from './FeedbackOptions.module.css';
 
 export const FeedbackOptions = ({onLeaveFeedback,options}) => {
+  
   return (
     <div className={styles.list_button}>        
       {options.map(option => {
